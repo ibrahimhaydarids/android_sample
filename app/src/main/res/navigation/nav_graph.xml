@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        tools:layout="@layout/home_fragment"
+        android:name="com.example.mytesting.ui.fragment.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_showDetailsFragment"
+            app:destination="@id/showDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_listJobsFragment"
+            app:destination="@id/showDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showDetailsFragment"
+        tools:layout="@layout/fragment_show_details"
+        android:name="com.example.mytesting.ui.fragment.ShowDetailsFragment"
+        android:label="DetailsFragment" >
+<!--        <argument
+            android:name="item"
+            app:argType="com.example.mytesting.models.Item" />-->
+    </fragment>
+
+</navigation>
