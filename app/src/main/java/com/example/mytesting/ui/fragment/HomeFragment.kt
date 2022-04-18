@@ -1,29 +1,41 @@
 package com.example.mytesting.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytesting.R
 import com.example.mytesting.helpers.EventObserver
+import com.example.mytesting.model.Item
+import com.example.mytesting.ui.adapters.ItemAdapter
 import com.example.mytesting.ui.viewmodels.HomeViewModel
-import com.example.mytesting.utils.toastt
+import com.example.mytesting.utils.hide
+import com.example.mytesting.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.home_fragment.*
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class HomeFragment: Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
 
+    @Inject
+    lateinit var itemAdapter:ItemAdapter
+
+    val items: ArrayList<Item> by lazy {
+        ArrayList()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listeners()
+        setupRecyclerViewJob()
         getGalleryItems()
         subscribeObservers()
     }
@@ -33,23 +45,41 @@ class HomeFragment: Fragment() {
 
 
     private fun listeners(){
-    /*    linearFooter.setOnClickListener {
-            findNavController().navigateUp()
-            findNavController().navigate(R.id.action_homeFragment_to_showDetailsFragment)
-        }*/
+
+        itemAdapter.setOnItemClickListener { item ->
+            val action = HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(item)
+            findNavController().navigate(action)
+        }
     }
 
     private fun getGalleryItems(){
         homeViewModel.getAllItems(1)
     }
 
+    private fun setupRecyclerViewJob() = rvItems.apply {
+        layoutManager = LinearLayoutManager(requireContext())
+        adapter = itemAdapter
+    }
+
     private fun subscribeObservers(){
         homeViewModel.listItems.observe(viewLifecycleOwner,EventObserver(
-            onLoading = {},
-            onError = {},
+            onLoading = {
+               loading.show()
+            },
+            onError = {
+                loading.hide()
+            },
         ){parent ->
-            toastt("...."+parent.items!!.size.toString())
+             loading.hide()
+            parent.items?.let { newItems ->
 
+                val oldCount: Int = items.size
+                items.addAll(newItems)
+                itemAdapter.homeViewModel=homeViewModel
+                itemAdapter.items = items
+                itemAdapter.notifyItemRangeChanged(oldCount, items.size)
+
+            }
         })
     }
 }

@@ -46,6 +46,8 @@ class ItemAdapter @Inject constructor(
 
     override fun onBindViewHolder(holder: SavedViewHolder, position: Int) {
         val item = items[position]
+        holder.tvTitle.text = item.categoryName!!
+        holder.tvDescription.text = item.date
 
         holder.linearItem.setOnClickListener{
             onItemClickListener?.let { click ->
@@ -56,11 +58,15 @@ class ItemAdapter @Inject constructor(
 
     override fun getItemCount(): Int = items.size
 
+    fun setOnItemClickListener(listener: (Item) -> Unit) {
+        onItemClickListener = listener
+    }
+
+
     inner class SavedViewHolder(itemView:View) :RecyclerView.ViewHolder(itemView){
         val tvTitle = itemView.tvTitle
         val tvDescription = itemView.tvDescription
         val linearItem = itemView.linearItem
     }
-
 
 }

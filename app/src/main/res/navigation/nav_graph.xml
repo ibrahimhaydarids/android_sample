@@ -22,9 +22,9 @@
         tools:layout="@layout/fragment_show_details"
         android:name="com.example.mytesting.ui.fragment.ShowDetailsFragment"
         android:label="DetailsFragment" >
-<!--        <argument
+        <argument
             android:name="item"
-            app:argType="com.example.mytesting.models.Item" />-->
+            app:argType="com.example.mytesting.model.Item" />
     </fragment>
 
 </navigation>
