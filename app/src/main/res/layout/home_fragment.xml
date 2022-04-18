@@ -3,19 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/loading"
         style="@style/SpinKitView.Large.FadingCircle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_centerInParent="true"
+        android:layout_gravity="center"
         app:SpinKit_Color="@color/colorAccent" />
 
     <androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/rvItems"
-    />
+        android:id="@+id/rvItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
