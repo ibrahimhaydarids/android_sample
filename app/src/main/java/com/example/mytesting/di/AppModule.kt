@@ -34,7 +34,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModel {
+object AppModule {
 
 
     @Singleton

@@ -11,7 +11,7 @@ import myappnew.com.conserve.data.AppDatabase
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object RoomModel {
+object RoomModule {
 
     @Provides
     @ViewModelScoped
