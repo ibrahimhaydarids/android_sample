@@ -54,6 +54,17 @@ fun String.occurrencesOf(sub: String): Int {
     return count
 }
 
+
+fun ImageView.loadImagesUrl(url: String) {
+    val options: RequestOptions = RequestOptions()
+        .centerCrop()
+        .placeholder(R.drawable.rectangular_gray)
+        .error(R.drawable.rectangular_gray)
+    Glide.with(this).load(url).apply(options)
+        .into(this)
+
+}
+
 fun Any.wtf(message: String) {
     if (MyBaseApp.showLogs)
         Log.wtf(this::class.java.simpleName, message)

@@ -11,6 +11,7 @@ import com.bumptech.glide.RequestManager
 import com.example.mytesting.R
 import com.example.mytesting.model.Item
 import com.example.mytesting.ui.viewmodels.HomeViewModel
+import com.example.mytesting.utils.loadImagesUrl
 import kotlinx.android.synthetic.main.item_recycler_items.view.*
 import javax.inject.Inject
 
@@ -48,6 +49,7 @@ class ItemAdapter @Inject constructor(
         val item = items[position]
         holder.tvTitle.text = item.categoryName!!
         holder.tvDescription.text = item.date
+       // holder.ivItem.loadImagesUrl(item.)
 
         holder.linearItem.setOnClickListener{
             onItemClickListener?.let { click ->
@@ -67,6 +69,7 @@ class ItemAdapter @Inject constructor(
         val tvTitle = itemView.tvTitle
         val tvDescription = itemView.tvDescription
         val linearItem = itemView.linearItem
+        val ivItem = itemView.ivItem
     }
 
 }
