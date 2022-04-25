@@ -30,15 +30,15 @@ class HomeRepository @Inject constructor(
     }
 
 
-  suspend  fun insertMarkedJob(job: Item): Resource<Long> = withContext(dispatcher){
+  suspend  fun insertFavoriteItem(item: Item): Resource<Long> = withContext(dispatcher){
       safeCall {
-        val result=itemsDao.insertItem(job)
+        val result=itemsDao.insertItem(item)
           Resource.Success(result)
       }
   }
-    suspend  fun deleteJob(item: Item): Resource<Int> = withContext(dispatcher){
+    suspend  fun deleteFavorite(item: Item): Resource<Int> = withContext(dispatcher){
       safeCall {
-        val result=itemsDao.delete(item.id!!)
+        val result=itemsDao.delete(item.id)
           Resource.Success(result)
       }
   }

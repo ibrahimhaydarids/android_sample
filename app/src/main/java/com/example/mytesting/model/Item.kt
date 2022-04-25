@@ -39,7 +39,8 @@ data class Item (
     @Expose
     var date: String?,
 
-    var favorite: Boolean?=false
+    @Expose
+    var favorite: Boolean = false
 
 ):Parcelable
 

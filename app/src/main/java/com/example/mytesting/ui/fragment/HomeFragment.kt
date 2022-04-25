@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytesting.R
@@ -18,6 +19,7 @@ import com.example.mytesting.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -50,7 +52,22 @@ class HomeFragment: Fragment() {
             val action = HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(item)
             findNavController().navigate(action)
         }
+
+
+        itemAdapter.setOnFavoriteClickListener{item,pos,image ->
+            if(!item.favorite){
+                homeViewModel.insertFavoriteItems(item)
+                image.setImageResource(R.drawable.ic_star_filled)
+            }else{
+                homeViewModel.deleteFavorite(item)
+                image.setImageResource(R.drawable.ic_star)
+            }
+
+        }
     }
+
+
+
 
     private fun getGalleryItems(){
         homeViewModel.getAllItems(1)
@@ -82,4 +99,7 @@ class HomeFragment: Fragment() {
             }
         })
     }
+
+
+
 }

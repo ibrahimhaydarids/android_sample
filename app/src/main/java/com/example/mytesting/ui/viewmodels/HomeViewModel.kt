@@ -27,8 +27,12 @@ class HomeViewModel
     private val _listItems= MutableLiveData<Event<Resource<ResponseGallery>>>()
     val listItems: LiveData<Event<Resource<ResponseGallery>>> =_listItems
 
-    private val _listCashedItems= MutableLiveData<Event<Resource<List<Item>>>>()
-    val listCashedItems: LiveData<Event<Resource<List<Item>>>> =_listCashedItems
+    private val _insertFavoriteItem= MutableLiveData<Event<Resource<Long>>>()
+    val insertFavoriteItem: LiveData<Event<Resource<Long>>> =_insertFavoriteItem
+
+    private val _deleteFavorite= MutableLiveData<Event<Resource<Int>>>()
+    val deleteFavorite: LiveData<Event<Resource<Int>>> =_deleteFavorite
+
     val data=repository.getAllCashedItems()
 
     fun  getAllItems(categoryId: Int) {
@@ -40,9 +44,30 @@ class HomeViewModel
         }
 
     }
+    
 
-    //
+    fun insertFavoriteItems(item: Item) {
+
+        _insertFavoriteItem.postValue(Event(Resource.Loading()))
+        viewModelScope.launch (dispatcher){
+            val result=repository.insertFavoriteItem(item)
+            _insertFavoriteItem.postValue(Event(result))
+
+        }
+   }
 
 
+    fun  deleteFavorite(item: Item) {
+
+        _deleteFavorite.postValue(Event(Resource.Loading()))
+
+        viewModelScope.launch(dispatcher) {
+            val result=repository.deleteFavorite(item)
+            _deleteFavorite.postValue(Event(result))
+        }
+
+    }
+    
+    
 
 }
