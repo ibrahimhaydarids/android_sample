@@ -8,7 +8,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "item_table")
 data class Item (
     @PrimaryKey(autoGenerate = false)
@@ -35,26 +37,9 @@ data class Item (
 
     @SerializedName("Date")
     @Expose
-    var date: String?
+    var date: String?,
 
-):Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString()
-    ) {
-    }
+    var favorite: Boolean?=false
 
-    override fun describeContents(): Int {
-        TODO("Not yet implemented")
-    }
-    override fun writeToParcel(p0: Parcel?, p1: Int) {
-        TODO("Not yet implemented")
-    }
+):Parcelable
 
-
-
-}

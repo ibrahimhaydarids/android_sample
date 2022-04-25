@@ -49,7 +49,8 @@ class ItemAdapter @Inject constructor(
         val item = items[position]
         holder.tvTitle.text = item.categoryName!!
         holder.tvDescription.text = item.date
-       // holder.ivItem.loadImagesUrl(item.)
+        //holder.btFavorite.setBackgroundResource(if(item.favorite!!) R.drawable.ic_star_filled else R.drawable.ic_star)
+        //holder.ivItem.loadImagesUrl(item.)
 
         holder.linearItem.setOnClickListener{
             onItemClickListener?.let { click ->
@@ -70,6 +71,7 @@ class ItemAdapter @Inject constructor(
         val tvDescription = itemView.tvDescription
         val linearItem = itemView.linearItem
         val ivItem = itemView.ivItem
+        val btFavorite = itemView.btFavorite
     }
 
 }
