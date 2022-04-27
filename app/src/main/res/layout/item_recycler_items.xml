@@ -4,6 +4,9 @@
     android:layout_height="90dp"
     android:orientation="vertical"
     android:id="@+id/linearItem"
+    android:clickable="true"
+    android:focusable="true"
+
     android:background="@color/blue_000"
     >
 
@@ -11,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
+
+        android:background="?attr/selectableItemBackground"
         android:layout_weight="1">
         <ImageView
             android:layout_width="80dp"
@@ -48,18 +53,27 @@
 
         </LinearLayout>
 
-        <ImageButton
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:background="@drawable/ic_star"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/small_margin"
-            android:layout_marginEnd="@dimen/small_margin"
+            android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:id="@+id/btFavorite"
 
-            />
+            >
+            <ImageButton
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:background="@drawable/ic_star"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:id="@+id/btFavorite"
+
+                />
+        </LinearLayout>
+
 
     </LinearLayout>
 

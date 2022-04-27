@@ -45,4 +45,6 @@ class HomeRepository @Inject constructor(
 
      fun   getAllCashedItems(): LiveData<List<Item>> = itemsDao.getAllCashedItems()
 
+    fun   getIdsList(): LiveData<List<Int>> = itemsDao.getIds()
+
 }

@@ -57,10 +57,10 @@ class HomeFragment: Fragment() {
         itemAdapter.setOnFavoriteClickListener{item,pos,image ->
             if(!item.favorite){
                 homeViewModel.insertFavoriteItems(item)
-                image.setImageResource(R.drawable.ic_star_filled)
+                image.setBackgroundResource(R.drawable.ic_star_filled)
             }else{
                 homeViewModel.deleteFavorite(item)
-                image.setImageResource(R.drawable.ic_star)
+                image.setBackgroundResource(R.drawable.ic_star)
             }
 
         }

@@ -20,6 +20,8 @@ interface ItemsDao {
     @Query("DELETE FROM item_table WHERE id = :id")
     suspend fun delete(id : Int):Int
 
+    @Query("select id from item_table")
+    fun getIds():LiveData<List<Int>>
 
     @Query("SELECT * FROM item_table WHERE name LIKE :keyword OR categoryName LIKE :keyword")
     suspend fun searchItems(keyword :String): List<Item>

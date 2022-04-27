@@ -51,8 +51,7 @@ class ItemAdapter @Inject constructor(
         val item = items[position]
         holder.tvTitle.text = item.categoryName!!
         holder.tvDescription.text = item.date
-        holder.btFavorite.setBackgroundResource(if(item.favorite) R.drawable.ic_star_filled else R.drawable.ic_star)
-        //holder.ivItem.loadImagesUrl(item.)
+        setFavorite(holder.btFavorite,item.favorite)
 
         holder.linearItem.setOnClickListener{
             onItemClickListener?.let { click ->
@@ -65,6 +64,27 @@ class ItemAdapter @Inject constructor(
                 click(item,position,holder.btFavorite)
             }
         }
+
+
+        holder.apply {
+            homeViewModel.dataIds.observeForever {
+                it?.let { list ->
+                    if (list.contains(item.id)) {
+                        item.favorite = true
+                        setFavorite(holder.btFavorite,true)
+                    } else {
+                        setFavorite(holder.btFavorite,false)
+                        item.favorite = false
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    private fun setFavorite(btn:ImageButton,favorite:Boolean){
+        btn.setBackgroundResource(if(favorite) R.drawable.ic_star_filled else R.drawable.ic_star)
     }
 
     override fun getItemCount(): Int = items.size

@@ -34,6 +34,8 @@ class HomeViewModel
     val deleteFavorite: LiveData<Event<Resource<Int>>> =_deleteFavorite
 
     val data=repository.getAllCashedItems()
+    val dataIds=repository.getIdsList()
+
 
     fun  getAllItems(categoryId: Int) {
 
@@ -67,7 +69,9 @@ class HomeViewModel
         }
 
     }
-    
-    
+
+    override fun onCleared() {
+        super.onCleared()
+    }
 
 }
